@@ -1,8 +1,8 @@
 {
-  "author": "Aaron Heckmann <aaron.heckmann+github@gmail.com>",
-  "name": "mongoose-keywordize",
-  "description": "creates keywords from document properties",
-  "version": "0.1.0",
+  "author": "Charlie Stigler <charlie@charliestigler.com>",
+  "name": "mongoose-fts",
+  "description": "Full-text search for Mongoose based on aheckmann/mongoose-keywordize and visionmedia/reds.",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/aheckmann/mongoose-keywordize.git"
@@ -13,7 +13,9 @@
   "engines": {
     "node": ">0.4.x"
   },
-  "dependencies": {},
+  "dependencies": {
+    "natural": "0.0.69"
+  },
   "devDependencies": {
     "mongoose": "2.7.0",
     "mocha": "0.10.1"
