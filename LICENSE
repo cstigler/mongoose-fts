@@ -1,6 +1,8 @@
 (The MIT License)
 
-Copyright (c) 2012 [Aaron Heckmann](aaron.heckmann+github@gmail.com)
+Copyright (c) 2012 [Charlie Stigler](charlie@charliestigler.com)
+
+Inspiration largely drawn from aheckmann/mongoose-keywordize and visionmedia/reds, which have their own licenses.
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
