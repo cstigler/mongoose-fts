@@ -33,7 +33,7 @@ describe('plugin', function () {
     assert.ok(fts.hasOwnProperty('version'));
   });
 
-  it('should create a keywords property of type array', function () {
+  it('should create an _keywords property of type array', function () {
     assert.equal(Person.schema.path('_keywords').casterConstructor.name,'SchemaString');
     var p = new Person;
     assert.equal(true, Array.isArray(p._keywords));
@@ -43,7 +43,7 @@ describe('plugin', function () {
     assert.equal('function', typeof Person.prototype.updateIndex);
   });
 
-  describe('keywordize', function () {
+  describe('', function () {
     it('should populate the keywords', function () {
       var p = new Person({ name: { last: 'heckmann' }});
       assert.equal(0, p._keywords.length);
@@ -123,6 +123,26 @@ describe('plugin', function () {
     });
   });
   
+  describe('keytypes', function() {
+    it('work with stemming', function(next) {
+      next();
+    });
+
+    it('work with metaphone keys', function(next) {
+      var s = new Schema({
+          name: String
+      });
+      var opts = { fields: 'name', keyType: 'metaphone' };
+      s.plugin(fts, opts);
+      var MetaTest = mongoose.model('MetaTest', s);
+      var a = new MetaTest;
+      a.name = 'Smith'
+      assert.equal(a.updateIndex().length, 1);
+      assert.equal(a.updateIndex()[0], 'SM0');
+      next();
+    });
+  });
+
   describe('options', function(){
 
   });
