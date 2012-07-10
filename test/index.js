@@ -125,6 +125,16 @@ describe('plugin', function () {
   
   describe('keytypes', function() {
     it('work with stemming', function(next) {
+      var s = new Schema({
+          name: String
+      });
+      var opts = { fields: 'name', keyType: 'stem' };
+      s.plugin(fts, opts);
+      var StemTest = mongoose.model('StemTest', s);
+      var a = new StemTest();
+      a.name = 'absolver'
+      assert.equal(a.updateIndex().length, 1);
+      assert.equal(a.updateIndex()[0], 'absolv');
       next();
     });
 
@@ -135,7 +145,7 @@ describe('plugin', function () {
       var opts = { fields: 'name', keyType: 'metaphone' };
       s.plugin(fts, opts);
       var MetaTest = mongoose.model('MetaTest', s);
-      var a = new MetaTest;
+      var a = new MetaTest();
       a.name = 'Smith'
       assert.equal(a.updateIndex().length, 1);
       assert.equal(a.updateIndex()[0], 'SM0');
@@ -144,7 +154,20 @@ describe('plugin', function () {
   });
 
   describe('options', function(){
-
+    it('uses alternate keyword path', function(next) {
+      var s = new Schema({
+          name: String
+      });
+      var opts = { fields: 'name', keywordsPath: 'theBestest' };
+      s.plugin(fts, opts);
+      var PathTest = mongoose.model('PathTest', s);
+      var a = new PathTest();
+      a.name = 'Smith';
+      a.updateIndex();
+      assert.equal(a.theBestest.length, 1);
+      assert.equal(a.theBestest[0], 'SM0');
+      next();
+    });
   });
 
   after(function () {
