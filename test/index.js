@@ -13,10 +13,10 @@ var schema = new Schema({
 
 var opts = {};
 opts.keyType = 'plain';
-opts.fields = ['name.first', 'name.last'];
+opts.fields = ['name.first', 'name.last', 'tags'];
 opts.fn = function () {
   if (this.isModified('tags')) {
-    return this.tags[1];
+    return 'four';
   }
 }
 
@@ -54,9 +54,9 @@ describe('plugin', function () {
       assert.equal(2, p._keywords.length);
       p.tags = "one two three".split(" ");
       p.updateIndex();
-      assert.equal(3, p._keywords.length);
+      assert.equal(6, p._keywords.length);
       p.updateIndex();
-      assert.equal(3, p._keywords.length);
+      assert.equal(6, p._keywords.length);
     });
 
     it('should return the keywords', function () {
